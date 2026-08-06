@@ -288,6 +288,40 @@
     font-size: 13px;
     color: #534AB7;
   }
+  .link-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+  .site-link {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #EEEDFE;
+    border-radius: 10px;
+    color: #534AB7;
+    text-decoration: none;
+    font-size: 13px;
+    font-family: 'Baloo 2', monospace;
+    word-break: break-all;
+    transition: background 0.2s;
+  }
+  .site-link:hover { background: #DDD9FB; }
+  .copy-btn {
+    padding: 8px 16px;
+    background: #534AB7;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .copy-btn:hover { background: #453d9e; }
+  .copy-btn.copied { background: #0F6E56; }
 
   /* ===== Footer ===== */
   .footer {
@@ -317,6 +351,7 @@
     .stat-card { min-width: 100px; padding: 14px; }
     .qr-section { flex-direction: column; text-align: center; }
     .qr-image { width: 140px; height: 140px; }
+    .link-box { flex-direction: column; align-items: stretch; }
   }
 </style>
 </head>
@@ -405,15 +440,19 @@
     </div>
   </div>
 
-  <!-- ===== QR Code ===== -->
+  <!-- ===== QR Code & Link ===== -->
   <div class="qr-section">
     <img src="qr-code.png" alt="扫码访问星伴日报" class="qr-image">
     <div class="qr-text">
-      <h3>📱 扫码收藏星伴日报</h3>
-      <p>用手机扫一扫左侧二维码，随时打开星伴日报。</p>
-      <p>打开后点击浏览器菜单 → <strong>添加到主屏幕</strong>或<strong>添加书签</strong>，下次一键直达！</p>
+      <h3>📱 扫码或点击链接收藏星伴日报</h3>
+      <p>用手机扫一扫左侧二维码，或点击下方链接直接访问：</p>
+      <div class="link-box">
+        <a href="https://f9f3153cc0a24b7ea7fc362925b5d794.sh3.agentos-app.net" class="site-link" target="_blank" rel="noopener">https://f9f3153cc0a24b7ea7fc362925b5d794.sh3.agentos-app.net</a>
+        <button class="copy-btn" onclick="copyLink()">复制链接</button>
+      </div>
       <div class="qr-tips">
-        💡 也可以在电脑浏览器中按 <strong>Ctrl+D</strong>（Mac 按 Cmd+D）收藏本页
+        💡 手机打开后点击浏览器菜单 → <strong>添加到主屏幕</strong>；电脑按 <strong>Ctrl+D</strong> 收藏本页<br>
+        🔗 短地址 <strong>coco-china.github.io</strong> 即将上线，敬请期待！
       </div>
     </div>
   </div>
@@ -426,5 +465,32 @@
   </div>
 
 </div>
+<script>
+function copyLink() {
+  var link = 'https://f9f3153cc0a24b7ea7fc362925b5d794.sh3.agentos-app.net';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(link).then(function() {
+      showCopied();
+    });
+  } else {
+    var textarea = document.createElement('textarea');
+    textarea.value = link;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    showCopied();
+  }
+}
+function showCopied() {
+  var btn = document.querySelector('.copy-btn');
+  btn.textContent = '已复制!';
+  btn.classList.add('copied');
+  setTimeout(function() {
+    btn.textContent = '复制链接';
+    btn.classList.remove('copied');
+  }, 2000);
+}
+</script>
 </body>
 </html>
