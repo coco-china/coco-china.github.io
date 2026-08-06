@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星伴日报 · 第001期 · 凑整法</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans SC', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #fff5f0 100%);
+    color: #1a1a2e;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .container { max-width: 860px; margin: 0 auto; padding: 20px; }
+
+  /* ===== Masthead ===== */
+  .masthead {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d2d5e 40%, #534AB7 100%);
+    border-radius: 20px;
+    padding: 40px 36px 32px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(83, 74, 183, 0.25);
+  }
+  .masthead::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 60px 70px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 130px 40px, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 200px 90px, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2px 2px at 300px 50px, rgba(250,199,117,0.6), transparent),
+      radial-gradient(1px 1px at 400px 80px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 500px 30px, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 600px 60px, rgba(237,147,177,0.5), transparent),
+      radial-gradient(2px 2px at 700px 100px, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 50px 120px, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1.5px 1.5px at 350px 130px, rgba(250,199,117,0.4), transparent),
+      radial-gradient(1px 1px at 650px 140px, rgba(255,255,255,0.4), transparent);
+    pointer-events: none;
+  }
+  .masthead-badge {
+    display: inline-block;
+    background: rgba(250, 199, 117, 0.2);
+    border: 1px solid rgba(250, 199, 117, 0.4);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    color: #FAC775;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .masthead h1 {
+    font-family: 'Baloo 2', 'Noto Sans SC', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+  }
+  .masthead .subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 8px;
+    position: relative;
+  }
+  .masthead-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+  }
+  .meta-item .label { color: rgba(255,255,255,0.5); }
+  .meta-item .value { color: #FAC775; font-weight: 500; }
+
+  /* ===== Progress Bar ===== */
+  .progress-bar {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .progress-card {
+    flex: 1;
+    min-width: 140px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .progress-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .progress-info .num { font-size: 20px; font-weight: 700; font-family: 'Baloo 2', sans-serif; }
+  .progress-info .lbl { font-size: 11px; color: #888; }
+
+  /* ===== TOC ===== */
+  .toc {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .toc-title {
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .toc-item {
+    text-align: center;
+    padding: 12px 6px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .toc-item:hover { transform: translateY(-3px); }
+  .toc-item .toc-icon { font-size: 22px; margin-bottom: 4px; }
+  .toc-item .toc-text { font-size: 11px; font-weight: 500; color: #555; }
+  .toc-warmup { background: #FAECE7; }
+  .toc-warmup .toc-icon { color: #D85A30; }
+  .toc-new { background: #E1F5EE; }
+  .toc-new .toc-icon { color: #0F6E56; }
+  .toc-practice { background: #E6F1FB; }
+  .toc-practice .toc-icon { color: #185FA5; }
+  .toc-connect { background: #EEEDFE; }
+  .toc-connect .toc-icon { color: #534AB7; }
+  .toc-summary { background: #FAEEDA; }
+  .toc-summary .toc-icon { color: #854F0B; }
+
+  /* ===== Section ===== */
+  .section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 16px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    scroll-margin-top: 20px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid;
+  }
+  .section-tag {
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+  .section-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .sec-warmup .section-header { border-color: #F5C4B3; }
+  .sec-warmup .section-tag { background: #FAECE7; color: #D85A30; }
+  .sec-warmup .section-header h2 { color: #D85A30; }
+  .sec-new .section-header { border-color: #9FE1CB; }
+  .sec-new .section-tag { background: #E1F5EE; color: #0F6E56; }
+  .sec-new .section-header h2 { color: #0F6E56; }
+  .sec-practice .section-header { border-color: #85B7EB; }
+  .sec-practice .section-tag { background: #E6F1FB; color: #185FA5; }
+  .sec-practice .section-header h2 { color: #185FA5; }
+  .sec-connect .section-header { border-color: #CECBF6; }
+  .sec-connect .section-tag { background: #EEEDFE; color: #534AB7; }
+  .sec-connect .section-header h2 { color: #534AB7; }
+  .sec-summary .section-header { border-color: #FAC775; }
+  .sec-summary .section-tag { background: #FAEEDA; color: #854F0B; }
+  .sec-summary .section-header h2 { color: #854F0B; }
+
+  /* ===== Content Styles ===== */
+  .intro-text { font-size: 14px; color: #444; margin-bottom: 14px; }
+  .highlight-box {
+    background: linear-gradient(135deg, #FAEEDA, #FFF9E6);
+    border-left: 4px solid #FAC775;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 14px;
+  }
+  .highlight-box strong { color: #854F0B; }
+  .question-box {
+    background: #F8F9FE;
+    border: 1.5px dashed #CECBF6;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 10px 0;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .hint-text {
+    font-size: 12px;
+    color: #888;
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ===== Diagram ===== */
+  .diagram-wrapper {
+    background: linear-gradient(135deg, #f8f9ff, #f5f0ff);
+    border-radius: 14px;
+    padding: 20px;
+    margin: 16px 0;
+    text-align: center;
+  }
+  .diagram-wrapper svg { max-width: 100%; height: auto; }
+
+  /* ===== Practice Cards ===== */
+  .practice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .practice-card {
+    background: #F8F9FE;
+    border: 1px solid #E0E7FF;
+    border-radius: 14px;
+    padding: 18px 20px;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .practice-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(133, 183, 235, 0.2);
+  }
+  .practice-card .difficulty {
+    position: absolute;
+    top: 12px; right: 14px;
+    font-size: 10px;
+    color: #FAC775;
+    letter-spacing: 1px;
+  }
+  .practice-card .q-num {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 13px;
+    color: #185FA5;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .practice-card .q-body {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a1a2e;
+  }
+  .practice-card .q-hint {
+    font-size: 12px;
+    color: #999;
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  .practice-card.full-width { grid-column: span 2; }
+
+  /* ===== Connection ===== */
+  .connection-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 14px 0;
+  }
+  .connection-card {
+    border-radius: 14px;
+    padding: 18px 20px;
+    font-size: 13px;
+  }
+  .connection-card .conn-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .conn-programming { background: #EEEDFE; }
+  .conn-programming .conn-title { color: #534AB7; }
+  .conn-go { background: #FAECE7; }
+  .conn-go .conn-title { color: #D85A30; }
+
+  /* ===== Summary Table ===== */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 13px;
+  }
+  .summary-table th {
+    background: linear-gradient(135deg, #FAEEDA, #FFF3D6);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: #854F0B;
+    border-radius: 8px 8px 0 0;
+  }
+  .summary-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #FAEEDA;
+  }
+  .summary-table tr:last-child td { border-bottom: none; }
+
+  /* ===== Next Preview ===== */
+  .next-preview {
+    background: linear-gradient(135deg, #1a1a2e, #2d2d5e);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 14px 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .next-preview .next-icon { font-size: 28px; }
+  .next-preview .next-text { font-size: 13px; }
+  .next-preview .next-text .day { color: #FAC775; font-weight: 600; }
+  .next-preview .next-text .topic { font-size: 15px; font-weight: 600; margin-top: 2px; }
+
+  /* ===== Submit Banner ===== */
+  .submit-banner {
+    background: linear-gradient(135deg, #E1F5EE, #E6F1FB);
+    border-radius: 14px;
+    padding: 18px 24px;
+    margin: 16px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #0F6E56;
+    border: 2px dashed #5DCAA5;
+  }
+  .submit-banner strong { color: #0F6E56; }
+
+  /* ===== Footer ===== */
+  .footer {
+    text-align: center;
+    padding: 28px 20px;
+    color: #888;
+    font-size: 12px;
+  }
+  .footer .footer-logo {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 16px;
+    color: #534AB7;
+    margin-bottom: 6px;
+  }
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .footer-nav a {
+    color: #534AB7;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 16px;
+    border: 1px solid #CECBF6;
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .footer-nav a:hover { background: #EEEDFE; }
+
+  /* ===== Answer Toggle (Show/Hide) ===== */
+  .answer-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    margin-top: 12px;
+    padding: 8px 14px;
+    background: linear-gradient(135deg, #E6F1FB, #EEEDFE);
+    border: 1.5px dashed #85B7EB;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #185FA5;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: 'Noto Sans SC', sans-serif;
+    user-select: none;
+  }
+  .answer-toggle:hover {
+    background: linear-gradient(135deg, #D6E7FB, #DEDDFE);
+    border-color: #378ADD;
+    transform: translateY(-1px);
+  }
+  .answer-toggle .toggle-icon {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+  .answer-toggle.open .toggle-icon {
+    transform: rotate(180deg);
+  }
+  .answer-toggle.open {
+    background: linear-gradient(135deg, #E1F5EE, #E6F1FB);
+    border-color: #5DCAA5;
+    color: #0F6E56;
+  }
+  .answer-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease, margin 0.3s ease;
+    padding: 0 16px;
+    margin-top: 0;
+  }
+  .answer-content.open {
+    max-height: 600px;
+    padding: 14px 16px;
+    margin-top: 10px;
+  }
+  .answer-inner {
+    background: linear-gradient(135deg, #F0FBF6, #F0F7FF);
+    border-radius: 10px;
+    padding: 14px 18px;
+    border-left: 4px solid #5DCAA5;
+  }
+  .answer-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #0F6E56;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .answer-value {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Baloo 2', sans-serif;
+    color: #0F6E56;
+    margin-bottom: 8px;
+  }
+  .answer-steps {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.8;
+  }
+  .answer-steps .step {
+    display: block;
+    margin-bottom: 4px;
+    padding-left: 18px;
+    position: relative;
+  }
+  .answer-steps .step::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #5DCAA5;
+    font-weight: 700;
+  }
+  .answer-fun {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #B8E6D0;
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 640px) {
+    .toc-grid { grid-template-columns: repeat(3, 1fr); }
+    .practice-grid { grid-template-columns: 1fr; }
+    .practice-card.full-width { grid-column: span 1; }
+    .connection-grid { grid-template-columns: 1fr; }
+    .masthead h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== Masthead ===== -->
+  <div class="masthead">
+    <div class="masthead-badge">STAR COMPANION DAILY</div>
+    <h1>星伴日报</h1>
+    <div class="subtitle">每一颗知识点，都是你星空中的一个星座</div>
+    <div class="masthead-meta">
+      <div class="meta-item"><span class="label">期号</span><span class="value">第 001 期</span></div>
+      <div class="meta-item"><span class="label">日期</span><span class="value">2026.08.06 周四</span></div>
+      <div class="meta-item"><span class="label">栏目</span><span class="value">奥数专题</span></div>
+      <div class="meta-item"><span class="label">撰文</span><span class="value">星伴</span></div>
+      <div class="meta-item"><span class="label">读者</span><span class="value">沈思辰</span></div>
+    </div>
+  </div>
+
+  <!-- ===== Progress ===== -->
+  <div class="progress-bar">
+    <div class="progress-card">
+      <div class="progress-icon" style="background:#FAEEDA;">🔥</div>
+      <div class="progress-info"><div class="num">1</div><div class="lbl">连续学习（天）</div></div>
+    </div>
+    <div class="progress-card">
+      <div class="progress-icon" style="background:#E1F5EE;">📚</div>
+      <div class="progress-info"><div class="num">1</div><div class="lbl">已学知识点</div></div>
+    </div>
+    <div class="progress-card">
+      <div class="progress-icon" style="background:#FAECE7;">📝</div>
+      <div class="progress-info"><div class="num">5</div><div class="lbl">今日练习题</div></div>
+    </div>
+    <div class="progress-card">
+      <div class="progress-icon" style="background:#EEEDFE;">🔄</div>
+      <div class="progress-info"><div class="num">0</div><div class="lbl">待复习错题</div></div>
+    </div>
+  </div>
+
+  <!-- ===== TOC ===== -->
+  <div class="toc">
+    <div class="toc-title">本期目录 / CONTENTS</div>
+    <div class="toc-grid">
+      <a href="#warmup" class="toc-item toc-warmup"><div class="toc-icon">🔥</div><div class="toc-text">热身回顾</div></a>
+      <a href="#new" class="toc-item toc-new"><div class="toc-icon">📖</div><div class="toc-text">今日新知</div></a>
+      <a href="#practice" class="toc-item toc-practice"><div class="toc-icon">🎯</div><div class="toc-text">练习挑战</div></a>
+      <a href="#connect" class="toc-item toc-connect"><div class="toc-icon">🔗</div><div class="toc-text">思维连接</div></a>
+      <a href="#summary" class="toc-item toc-summary"><div class="toc-icon">📝</div><div class="toc-text">今日总结</div></a>
+    </div>
+  </div>
+
+  <!-- ===== Warm-up ===== -->
+  <div class="section sec-warmup" id="warmup">
+    <div class="section-header">
+      <span class="section-tag">WARM UP</span>
+      <h2>热身回顾</h2>
+    </div>
+    <p class="intro-text">今天是第一期，没有昨天的内容要复习。先来两道热身题，激活你的数学大脑！</p>
+    <div class="question-box">99 + 1 = ？</div>
+    <p class="intro-text" style="text-align:center; color:#888;">—— 太简单了？再看下一题 ——</p>
+    <div class="question-box">99 + 99 + 99 + 99 + 99 = ？</div>
+    <p class="hint-text">嘿嘿，一个个加要算半天。但学完今天的凑整法，你三秒就能算出来！</p>
+  </div>
+
+  <!-- ===== New Knowledge ===== -->
+  <div class="section sec-new" id="new">
+    <div class="section-header">
+      <span class="section-tag">NEW KNOWLEDGE</span>
+      <h2>今日新知：凑整法</h2>
+    </div>
+    <p class="intro-text">天上的星星一颗一颗数，数到眼花。但古人很聪明——把星星<strong>连成星座</strong>，大熊座、仙女座、猎户座……一眼就认出来了。</p>
+    <p class="intro-text">算术也一样。<strong>18 + 23 + 82 + 77</strong>，从左到右一个个算，又慢又容易出错。但如果你先找"好朋友"——</p>
+
+    <div class="diagram-wrapper">
+      <svg viewBox="0 0 680 400" width="100%" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>凑整法概念图</title>
+        <desc>展示如何将散开的数字配对凑整，像星星连成星座一样</desc>
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <text x="340" y="28" text-anchor="middle" font-size="14" font-weight="500" fill="#3C3489" font-family="sans-serif">凑整法 — 让数字连成星座</text>
+        <rect x="40" y="50" width="240" height="220" rx="12" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+        <text x="160" y="72" text-anchor="middle" font-size="13" font-weight="500" fill="#5F5E5A" font-family="sans-serif">散落的星辰</text>
+        <circle cx="90" cy="115" r="20" fill="#FAEEDA" stroke="#EF9F27" stroke-width="1"/>
+        <text x="90" y="115" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#412402" font-family="sans-serif">18</text>
+        <circle cx="210" cy="105" r="20" fill="#FAEEDA" stroke="#EF9F27" stroke-width="1"/>
+        <text x="210" y="105" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#412402" font-family="sans-serif">23</text>
+        <circle cx="215" cy="190" r="20" fill="#FAEEDA" stroke="#EF9F27" stroke-width="1"/>
+        <text x="215" y="190" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#412402" font-family="sans-serif">82</text>
+        <circle cx="95" cy="200" r="20" fill="#FAEEDA" stroke="#EF9F27" stroke-width="1"/>
+        <text x="95" y="200" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#412402" font-family="sans-serif">77</text>
+        <text x="160" y="250" text-anchor="middle" font-size="12" fill="#888780" font-family="sans-serif">18 + 23 + 82 + 77 = ?</text>
+        <line x1="295" y1="160" x2="360" y2="160" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <text x="327" y="148" text-anchor="middle" font-size="11" fill="#534AB7" font-family="sans-serif">找好朋友</text>
+        <rect x="370" y="50" width="270" height="220" rx="12" fill="#EEEDFE" stroke="#CECBF6" stroke-width="0.5"/>
+        <text x="505" y="72" text-anchor="middle" font-size="13" font-weight="500" fill="#534AB7" font-family="sans-serif">连成星座</text>
+        <circle cx="410" cy="120" r="20" fill="#E1F5EE" stroke="#5DCAA5" stroke-width="1"/>
+        <text x="410" y="120" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#04342C" font-family="sans-serif">18</text>
+        <line x1="430" y1="120" x2="510" y2="120" stroke="#1D9E75" stroke-width="1" stroke-dasharray="4,3"/>
+        <circle cx="530" cy="120" r="20" fill="#E1F5EE" stroke="#5DCAA5" stroke-width="1"/>
+        <text x="530" y="120" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#04342C" font-family="sans-serif">82</text>
+        <text x="585" y="120" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#0F6E56" font-family="sans-serif">= 100</text>
+        <circle cx="410" cy="185" r="20" fill="#E6F1FB" stroke="#85B7EB" stroke-width="1"/>
+        <text x="410" y="185" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#042C53" font-family="sans-serif">23</text>
+        <line x1="430" y1="185" x2="510" y2="185" stroke="#378ADD" stroke-width="1" stroke-dasharray="4,3"/>
+        <circle cx="530" cy="185" r="20" fill="#E6F1FB" stroke="#85B7EB" stroke-width="1"/>
+        <text x="530" y="185" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="#042C53" font-family="sans-serif">77</text>
+        <text x="585" y="185" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="500" fill="#185FA5" font-family="sans-serif">= 100</text>
+        <text x="505" y="248" text-anchor="middle" font-size="13" font-weight="500" fill="#0F6E56" font-family="sans-serif">100 + 100 = 200</text>
+        <rect x="40" y="295" width="600" height="85" rx="12" fill="#FAEEDA" stroke="#FAC775" stroke-width="0.5"/>
+        <text x="340" y="318" text-anchor="middle" font-size="13" font-weight="500" fill="#854F0B" font-family="sans-serif">星伴的秘密</text>
+        <text x="340" y="340" text-anchor="middle" font-size="12" fill="#633806" font-family="sans-serif">不要从左到右一个一个算 — 先找"好朋友"配对</text>
+        <text x="340" y="360" text-anchor="middle" font-size="12" fill="#633806" font-family="sans-serif">能凑成 10、100、1000 的数字就是好朋友</text>
+        <text x="340" y="375" text-anchor="middle" font-size="11" fill="#888780" font-family="sans-serif">就像天上的星星，连成星座就一眼认出来了</text>
+      </svg>
+    </div>
+
+    <div class="highlight-box">
+      <strong>凑整法核心秘诀：</strong>不要按顺序傻算，先找能凑成 <strong>10、100、1000</strong> 的数字配对。个位加起来等于 10 的两个数，就是"好朋友"！
+    </div>
+    <p class="intro-text">思辰，你的名字里有个「辰」字，辰就是星辰。凑整法就像把散落的星辰连成星座——<strong>连起来，就一目了然了</strong>。</p>
+  </div>
+
+  <!-- ===== Practice ===== -->
+  <div class="section sec-practice" id="practice">
+    <div class="section-header">
+      <span class="section-tag">CHALLENGE</span>
+      <h2>练习挑战</h2>
+    </div>
+    <p class="intro-text">做完把答案发给我，我来批改！做错了没关系，错题是最好的老师。</p>
+    <div class="practice-grid">
+      <div class="practice-card">
+        <div class="difficulty">⭐</div>
+        <div class="q-num">第 1 题 · 入门</div>
+        <div class="q-body">26 + 47 + 74 + 53 = ?</div>
+        <div class="answer-toggle"><span class="toggle-icon">▾</span><span class="toggle-text">查看答案与解析</span></div>
+        <div class="answer-content">
+          <div class="answer-inner">
+            <div class="answer-label">✅ 答案</div>
+            <div class="answer-value">200</div>
+            <div class="answer-label">💡 解题思路</div>
+            <div class="answer-steps">
+              <span class="step">找好朋友：26 和 74 个位 6+4=10，能凑整</span>
+              <span class="step">找好朋友：47 和 53 个位 7+3=10，能凑整</span>
+              <span class="step">26 + 74 = 100</span>
+              <span class="step">47 + 53 = 100</span>
+              <span class="step">100 + 100 = 200</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="difficulty">⭐⭐</div>
+        <div class="q-num">第 2 题 · 基础</div>
+        <div class="q-body">99 + 99 + 99 + 99 + 99 = ?</div>
+        <div class="q-hint">提示：99 离哪个整百数最近？</div>
+        <div class="answer-toggle"><span class="toggle-icon">▾</span><span class="toggle-text">查看答案与解析</span></div>
+        <div class="answer-content">
+          <div class="answer-inner">
+            <div class="answer-label">✅ 答案</div>
+            <div class="answer-value">495</div>
+            <div class="answer-label">💡 解题思路</div>
+            <div class="answer-steps">
+              <span class="step">99 离 100 最近，差 1</span>
+              <span class="step">把每个 99 看成 100：100×5 = 500</span>
+              <span class="step">但每个都多加了 1，一共多加了 5</span>
+              <span class="step">500 − 5 = 495</span>
+            </div>
+            <div class="answer-fun">这种方法叫"多退少补"——先凑整，再调整！</div>
+          </div>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="difficulty">⭐⭐</div>
+        <div class="q-num">第 3 题 · 进阶</div>
+        <div class="q-body">7 + 8 + 9 + 10 + 11 + 12 + 13 = ?</div>
+        <div class="q-hint">提示：试试从两头往中间配对</div>
+        <div class="answer-toggle"><span class="toggle-icon">▾</span><span class="toggle-text">查看答案与解析</span></div>
+        <div class="answer-content">
+          <div class="answer-inner">
+            <div class="answer-label">✅ 答案</div>
+            <div class="answer-value">70</div>
+            <div class="answer-label">💡 解题思路</div>
+            <div class="answer-steps">
+              <span class="step">从两头配对：7+13=20，8+12=20，9+11=20</span>
+              <span class="step">三组各等于 20，还剩中间的 10</span>
+              <span class="step">20 + 20 + 20 + 10 = 70</span>
+            </div>
+            <div class="answer-fun">中间那个 10 就是这串数的"平均值"！连续数的和 = 平均值 × 个数。</div>
+          </div>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="difficulty">⭐⭐⭐</div>
+        <div class="q-num">第 4 题 · 挑战</div>
+        <div class="q-body">198 + 199 + 203 + 202 = ?</div>
+        <div class="q-hint">提示：每个数都接近哪个整百数？</div>
+        <div class="answer-toggle"><span class="toggle-icon">▾</span><span class="toggle-text">查看答案与解析</span></div>
+        <div class="answer-content">
+          <div class="answer-inner">
+            <div class="answer-label">✅ 答案</div>
+            <div class="answer-value">802</div>
+            <div class="answer-label">💡 解题思路</div>
+            <div class="answer-steps">
+              <span class="step">每个数都接近 200</span>
+              <span class="step">198 = 200 − 2，199 = 200 − 1</span>
+              <span class="step">203 = 200 + 3，202 = 200 + 2</span>
+              <span class="step">200×4 = 800，再算偏差：−2−1+3+2 = +2</span>
+              <span class="step">800 + 2 = 802</span>
+            </div>
+            <div class="answer-fun">偏差正好一正一负互相抵消——找基准数法！</div>
+          </div>
+        </div>
+      </div>
+      <div class="practice-card full-width">
+        <div class="difficulty">⭐⭐⭐⭐</div>
+        <div class="q-num">第 5 题 · 大挑战</div>
+        <div class="q-body">1 + 2 + 3 + 4 + … + 20 = ?</div>
+        <div class="q-hint">提示：这道题有个 200 年前的 9 岁小男孩用配对法秒解了，他后来成了"数学王子"——你知道他是谁吗？</div>
+        <div class="answer-toggle"><span class="toggle-icon">▾</span><span class="toggle-text">查看答案与解析</span></div>
+        <div class="answer-content">
+          <div class="answer-inner">
+            <div class="answer-label">✅ 答案</div>
+            <div class="answer-value">210</div>
+            <div class="answer-label">💡 解题思路</div>
+            <div class="answer-steps">
+              <span class="step">配对：1+20=21，2+19=21，3+18=21 …</span>
+              <span class="step">一共 20 个数，可以配成 10 对</span>
+              <span class="step">每对的和都是 21</span>
+              <span class="step">21 × 10 = 210</span>
+            </div>
+            <div class="answer-fun">200 年前那个 9 岁男孩就是<strong>高斯</strong>（Gauss）！他发现的这个方法叫"高斯配对法"。公式：(首项+末项)×项数÷2 = (1+20)×20÷2 = 210。以后奥数中你会经常用到！</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Connections ===== -->
+  <div class="section sec-connect" id="connect">
+    <div class="section-header">
+      <span class="section-tag">CONNECTION</span>
+      <h2>思维连接</h2>
+    </div>
+    <p class="intro-text">凑整法的"配对"思想在很多地方都能用到：</p>
+    <div class="connection-grid">
+      <div class="connection-card conn-programming">
+        <div class="conn-title">💻 编程连接</div>
+        计算机处理大量数据时，不会一条一条算，而是把数据<strong>分组批量处理</strong>，这叫"优化"。以后学编程你会经常遇到。
+      </div>
+      <div class="connection-card conn-go">
+        <div class="conn-title">♟ 围棋连接</div>
+        数地盘时不会一颗子一颗子数，而是先看大块区域<strong>估算</strong>。分组思维让你算得更快更准。
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Summary ===== -->
+  <div class="section sec-summary" id="summary">
+    <div class="section-header">
+      <span class="section-tag">SUMMARY</span>
+      <h2>今日总结</h2>
+    </div>
+    <table class="summary-table">
+      <tr><th>要点</th><th>内容</th></tr>
+      <tr><td>核心方法</td><td>先找凑整好朋友，再配对计算</td></tr>
+      <tr><td>判断标准</td><td>个位相加 = 10 → 一对好朋友</td></tr>
+      <tr><td>适用场景</td><td>多个数相加时</td></tr>
+      <tr><td>思维迁移</td><td>编程的批量处理、围棋的地盘估算</td></tr>
+    </table>
+
+    <div class="next-preview">
+      <div class="next-icon">♟</div>
+      <div class="next-text">
+        <div class="day">明日预告 · 8月7日 周五</div>
+        <div class="topic">围棋提升 — 死活题训练（匹配你的级位难度）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Submit Banner ===== -->
+  <div class="submit-banner">
+    <strong>💡 自学模式：</strong> 先自己做题，做完后点击每题的「查看答案与解析」对照检查<br>
+    <strong>有做错的题？</strong> 把题号发给我，我会详细讲解并加入错题复习循环（1天 → 3天 → 7天 → 14天）<br>
+    <strong>全部做对了？</strong> 也告诉我一声，我会给你加深难度！
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <div class="footer">
+    <div class="footer-logo">星伴日报 ✨</div>
+    <div>撰文：星伴 | 读者：沈思辰 | 第 001 期</div>
+    <div class="footer-nav">
+      <a href="index.html">📚 往期目录</a>
+      <a href="#warmup">回到顶部</a>
+    </div>
+  </div>
+
+</div>
+<script>
+document.querySelectorAll('.answer-toggle').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var content = this.nextElementSibling;
+    var isOpen = content.classList.contains('open');
+    if (isOpen) {
+      content.classList.remove('open');
+      this.classList.remove('open');
+      this.querySelector('.toggle-text').textContent = '查看答案与解析';
+    } else {
+      content.classList.add('open');
+      this.classList.add('open');
+      this.querySelector('.toggle-text').textContent = '收起答案与解析';
+    }
+  });
+});
+</script>
+</body>
+</html>
