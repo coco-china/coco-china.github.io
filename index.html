@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星伴日报 ✨ — 每日学习期刊</title>
+<meta name="description" content="星伴日报 — 为热爱学习的小朋友量身定制的每日学习期刊，涵盖数学、奥数、语文、编程、围棋、认知训练五大领域。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans SC', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #fff5f0 100%);
+    color: #1a1a2e;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* ===== Hero Header ===== */
+  .hero {
+    background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 25%, #2d2d5e 55%, #534AB7 100%);
+    border-radius: 24px;
+    padding: 56px 40px 44px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba(83, 74, 183, 0.3);
+    text-align: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 60px 70px, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1.5px 1.5px at 130px 40px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 200px 90px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(2.5px 2.5px at 300px 50px, rgba(250,199,117,0.7), transparent),
+      radial-gradient(1px 1px at 400px 80px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 500px 30px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 600px 60px, rgba(237,147,177,0.5), transparent),
+      radial-gradient(2px 2px at 700px 100px, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 50px 120px, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1.5px 1.5px at 350px 130px, rgba(250,199,117,0.4), transparent),
+      radial-gradient(1px 1px at 650px 140px, rgba(255,255,255,0.4), transparent),
+      radial-gradient(2px 2px at 250px 180px, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1px 1px at 450px 200px, rgba(250,199,117,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 550px 170px, rgba(255,255,255,0.3), transparent);
+    pointer-events: none;
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(250, 199, 117, 0.15);
+    border: 1px solid rgba(250, 199, 117, 0.35);
+    border-radius: 20px;
+    padding: 5px 18px;
+    font-size: 12px;
+    color: #FAC775;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Baloo 2', 'Noto Sans SC', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    position: relative;
+  }
+  .hero .tagline {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 10px;
+    position: relative;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+  }
+  .hero-meta-item .label { color: rgba(255,255,255,0.5); }
+  .hero-meta-item .value { color: #FAC775; font-weight: 500; }
+
+  /* ===== Intro Section ===== */
+  .intro-section {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin: 20px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .intro-section h2 {
+    font-family: 'Baloo 2', 'Noto Sans SC', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #534AB7;
+    margin-bottom: 14px;
+  }
+  .intro-section p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  .subject-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .subject-tag {
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .st-math { background: #E1F5EE; color: #0F6E56; }
+  .st-chinese { background: #FAECE7; color: #D85A30; }
+  .st-coding { background: #E6F1FB; color: #185FA5; }
+  .st-olympiad { background: #EEEDFE; color: #534AB7; }
+  .st-go { background: #FAEEDA; color: #854F0B; }
+
+  /* ===== Stats ===== */
+  .stats {
+    display: flex;
+    gap: 14px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .stat-card {
+    flex: 1;
+    min-width: 130px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    transition: transform 0.2s;
+  }
+  .stat-card:hover { transform: translateY(-3px); }
+  .stat-card .stat-icon { font-size: 24px; margin-bottom: 8px; }
+  .stat-card .stat-num {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: #534AB7;
+  }
+  .stat-card .stat-label { font-size: 12px; color: #888; margin-top: 2px; }
+
+  /* ===== Issue List ===== */
+  .issue-section {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin: 20px 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  }
+  .section-title {
+    font-family: 'Baloo 2', 'Noto Sans SC', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 6px;
+  }
+  .section-subtitle {
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .issue-list { display: flex; flex-direction: column; gap: 14px; }
+  .issue-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    border-radius: 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid transparent;
+  }
+  .issue-card:hover {
+    transform: translateX(6px);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  }
+  .issue-num {
+    width: 60px; height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .issue-info { flex: 1; }
+  .issue-info .issue-date { font-size: 12px; color: #888; }
+  .issue-info .issue-title { font-size: 16px; font-weight: 600; margin-top: 2px; }
+  .issue-info .issue-desc { font-size: 13px; color: #999; margin-top: 2px; }
+  .issue-arrow { font-size: 20px; color: #ccc; }
+
+  /* Category colors */
+  .cat-math { background: #E1F5EE; }
+  .cat-math .issue-num { background: #5DCAA5; color: #fff; }
+  .cat-chinese { background: #FAECE7; }
+  .cat-chinese .issue-num { background: #F0997B; color: #fff; }
+  .cat-coding { background: #E6F1FB; }
+  .cat-coding .issue-num { background: #378ADD; color: #fff; }
+  .cat-olympiad { background: #EEEDFE; }
+  .cat-olympiad .issue-num { background: #7F77DD; color: #fff; }
+  .cat-go { background: #FAEEDA; }
+  .cat-go .issue-num { background: #EF9F27; color: #fff; }
+  .cat-project { background: #FBEAF0; }
+  .cat-project .issue-num { background: #D4537E; color: #fff; }
+  .cat-review { background: #F1EFE8; }
+  .cat-review .issue-num { background: #888780; color: #fff; }
+
+  /* ===== Legend ===== */
+  .legend {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .legend-item {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+
+  /* ===== QR Section ===== */
+  .qr-section {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin: 20px 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .qr-image {
+    width: 160px;
+    height: 160px;
+    border-radius: 16px;
+    border: 3px solid #f0f0f0;
+    flex-shrink: 0;
+  }
+  .qr-text { flex: 1; min-width: 200px; }
+  .qr-text h3 {
+    font-family: 'Baloo 2', 'Noto Sans SC', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #534AB7;
+    margin-bottom: 8px;
+  }
+  .qr-text p { font-size: 13px; color: #666; margin-bottom: 6px; }
+  .qr-tips {
+    margin-top: 10px;
+    padding: 12px 16px;
+    background: #F5F3FF;
+    border-radius: 12px;
+    font-size: 13px;
+    color: #534AB7;
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    text-align: center;
+    padding: 36px 20px;
+    color: #888;
+    font-size: 13px;
+  }
+  .footer .footer-logo {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 20px;
+    color: #534AB7;
+    margin-bottom: 8px;
+  }
+  .footer .footer-desc {
+    color: #aaa;
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 30px; }
+    .hero { padding: 40px 24px 32px; }
+    .intro-section, .issue-section { padding: 24px 20px; }
+    .stats { gap: 10px; }
+    .stat-card { min-width: 100px; padding: 14px; }
+    .qr-section { flex-direction: column; text-align: center; }
+    .qr-image { width: 140px; height: 140px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== Hero ===== -->
+  <div class="hero">
+    <div class="hero-badge">STAR COMPANION DAILY</div>
+    <h1>星伴日报 ✨</h1>
+    <div class="tagline">每一颗知识点，都是你星空中的一个星座</div>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="label">主编</span><span class="value">星伴</span></div>
+      <div class="hero-meta-item"><span class="label">读者</span><span class="value">沈思辰</span></div>
+      <div class="hero-meta-item"><span class="label">创刊</span><span class="value">2026.08.06</span></div>
+      <div class="hero-meta-item"><span class="label">频率</span><span class="value">每日一期</span></div>
+    </div>
+  </div>
+
+  <!-- ===== Stats ===== -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-icon">📰</div>
+      <div class="stat-num">1</div>
+      <div class="stat-label">已发期刊</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">📚</div>
+      <div class="stat-num">1</div>
+      <div class="stat-label">已学知识点</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">📝</div>
+      <div class="stat-num">5</div>
+      <div class="stat-label">已做练习题</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🔥</div>
+      <div class="stat-num">1</div>
+      <div class="stat-label">连续学习（天）</div>
+    </div>
+  </div>
+
+  <!-- ===== Intro ===== -->
+  <div class="intro-section">
+    <h2>关于星伴日报</h2>
+    <p>星伴日报是一份为热爱学习的小朋友量身定制的<strong>每日学习期刊</strong>，每天一期，像期刊一样连载存档，随时翻阅复习。</p>
+    <p>内容涵盖五大学习领域，采用<strong>螺旋上升</strong>学习方法——每个知识点隔几天再回来加深一层，配合<strong>间隔重复</strong>错题复习机制，让知识真正内化。</p>
+    <p>每天的结构：热身回顾 → 今日新知 → 练习挑战 → 思维连接 → 今日总结，约 45 分钟学习量。</p>
+    <div class="subject-tags">
+      <span class="subject-tag st-math">📐 数学拓展</span>
+      <span class="subject-tag st-chinese">📖 语文提升</span>
+      <span class="subject-tag st-coding">💻 计算思维</span>
+      <span class="subject-tag st-olympiad">🧩 奥数专题</span>
+      <span class="subject-tag st-go">♟ 围棋提升</span>
+    </div>
+  </div>
+
+  <!-- ===== Issue List ===== -->
+  <div class="issue-section">
+    <div class="section-title">往期目录</div>
+    <div class="section-subtitle">ARCHIVE / 每日一期，持续连载</div>
+    <div class="issue-list">
+
+      <a href="2026-08-06-issue-001.html" class="issue-card cat-olympiad">
+        <div class="issue-num">001</div>
+        <div class="issue-info">
+          <div class="issue-date">2026.08.06 周四</div>
+          <div class="issue-title">奥数专题 · 凑整法</div>
+          <div class="issue-desc">速算巧算入门 — 让数字连成星座</div>
+        </div>
+        <div class="issue-arrow">→</div>
+      </a>
+
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+      <span class="legend-item" style="background:#E1F5EE; color:#0F6E56;">🟢 数学拓展</span>
+      <span class="legend-item" style="background:#FAECE7; color:#D85A30;">🟠 语文提升</span>
+      <span class="legend-item" style="background:#E6F1FB; color:#185FA5;">🔵 计算思维</span>
+      <span class="legend-item" style="background:#EEEDFE; color:#534AB7;">🟣 奥数专题</span>
+      <span class="legend-item" style="background:#FAEEDA; color:#854F0B;">🟡 围棋提升</span>
+      <span class="legend-item" style="background:#FBEAF0; color:#D4537E;">🔴 跨学科项目</span>
+      <span class="legend-item" style="background:#F1EFE8; color:#888;">⚫ 认知复习</span>
+    </div>
+  </div>
+
+  <!-- ===== QR Code ===== -->
+  <div class="qr-section">
+    <img src="qr-code.png" alt="扫码访问星伴日报" class="qr-image">
+    <div class="qr-text">
+      <h3>📱 扫码收藏星伴日报</h3>
+      <p>用手机扫一扫左侧二维码，随时打开星伴日报。</p>
+      <p>打开后点击浏览器菜单 → <strong>添加到主屏幕</strong>或<strong>添加书签</strong>，下次一键直达！</p>
+      <div class="qr-tips">
+        💡 也可以在电脑浏览器中按 <strong>Ctrl+D</strong>（Mac 按 Cmd+D）收藏本页
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <div class="footer">
+    <div class="footer-logo">星伴日报 ✨</div>
+    <div>主编：星伴 | 读者：沈思辰</div>
+    <div class="footer-desc">每一颗知识点，都是星空中的一个星座 · 每日一期，持续连载</div>
+  </div>
+
+</div>
+</body>
+</html>
