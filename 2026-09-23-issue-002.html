@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星伴日报 · 第002期 · 流程图</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans SC', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #fff5f0 100%);
+    color: #1a1a2e;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+  .container { max-width: 860px; margin: 0 auto; padding: 20px; }
+
+  /* ===== Masthead ===== */
+  .masthead {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d2d5e 40%, #534AB7 100%);
+    border-radius: 20px;
+    padding: 40px 36px 32px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(83, 74, 183, 0.25);
+  }
+  .masthead::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 60px 70px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 130px 40px, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 200px 90px, rgba(255,255,255,0.5), transparent),
+      radial-gradient(2px 2px at 300px 50px, rgba(250,199,117,0.6), transparent),
+      radial-gradient(1px 1px at 400px 80px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 500px 30px, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 600px 60px, rgba(237,147,177,0.5), transparent),
+      radial-gradient(2px 2px at 700px 100px, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 50px 120px, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1.5px 1.5px at 350px 130px, rgba(250,199,117,0.4), transparent),
+      radial-gradient(1px 1px at 650px 140px, rgba(255,255,255,0.4), transparent);
+    pointer-events: none;
+  }
+  .masthead-badge {
+    display: inline-block;
+    background: rgba(250, 199, 117, 0.2);
+    border: 1px solid rgba(250, 199, 117, 0.4);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    color: #FAC775;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .masthead h1 {
+    font-family: 'Baloo 2', 'Noto Sans SC', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+  }
+  .masthead .subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 8px;
+    position: relative;
+  }
+  .masthead-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+  }
+  .meta-item .label { color: rgba(255,255,255,0.5); }
+  .meta-item .value { color: #FAC775; font-weight: 500; }
+
+  /* ===== Progress Bar ===== */
+  .progress-bar {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .progress-card {
+    flex: 1;
+    min-width: 140px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .progress-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .progress-info .num { font-size: 20px; font-weight: 700; font-family: 'Baloo 2', sans-serif; }
+  .progress-info .lbl { font-size: 11px; color: #888; }
+
+  /* ===== TOC ===== */
+  .toc {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .toc-title {
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .toc-item {
+    text-align: center;
+    padding: 12px 6px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .toc-item:hover { transform: translateY(-3px); }
+  .toc-item .toc-icon { font-size: 22px; margin-bottom: 4px; }
+  .toc-item .toc-text { font-size: 11px; font-weight: 500; color: #555; }
+  .toc-warmup { background: #FAECE7; }
+  .toc-warmup .toc-icon { color: #D85A30; }
+  .toc-new { background: #E1F5EE; }
+  .toc-new .toc-icon { color: #0F6E56; }
+  .toc-practice { background: #E6F1FB; }
+  .toc-practice .toc-icon { color: #185FA5; }
+  .toc-connect { background: #EEEDFE; }
+  .toc-connect .toc-icon { color: #534AB7; }
+  .toc-summary { background: #FAEEDA; }
+  .toc-summary .toc-icon { color: #854F0B; }
+
+  /* ===== Section ===== */
+  .section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 16px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    scroll-margin-top: 20px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid;
+  }
+  .section-tag {
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+  .section-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .sec-warmup .section-header { border-color: #F5C4B3; }
+  .sec-warmup .section-tag { background: #FAECE7; color: #D85A30; }
+  .sec-warmup .section-header h2 { color: #D85A30; }
+  .sec-new .section-header { border-color: #9FE1CB; }
+  .sec-new .section-tag { background: #E1F5EE; color: #0F6E56; }
+  .sec-new .section-header h2 { color: #0F6E56; }
+  .sec-practice .section-header { border-color: #85B7EB; }
+  .sec-practice .section-tag { background: #E6F1FB; color: #185FA5; }
+  .sec-practice .section-header h2 { color: #185FA5; }
+  .sec-connect .section-header { border-color: #CECBF6; }
+  .sec-connect .section-tag { background: #EEEDFE; color: #534AB7; }
+  .sec-connect .section-header h2 { color: #534AB7; }
+  .sec-summary .section-header { border-color: #FAC775; }
+  .sec-summary .section-tag { background: #FAEEDA; color: #854F0B; }
+  .sec-summary .section-header h2 { color: #854F0B; }
+
+  /* ===== Content Styles ===== */
+  .intro-text { font-size: 14px; color: #444; margin-bottom: 14px; }
+  .highlight-box {
+    background: linear-gradient(135deg, #FAEEDA, #FFF9E6);
+    border-left: 4px solid #FAC775;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 14px;
+  }
+  .highlight-box strong { color: #854F0B; }
+  .question-box {
+    background: #F8F9FE;
+    border: 1.5px dashed #CECBF6;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 10px 0;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .hint-text {
+    font-size: 12px;
+    color: #888;
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ===== Diagram ===== */
+  .diagram-wrapper {
+    background: linear-gradient(135deg, #f8f9ff, #f5f0ff);
+    border-radius: 14px;
+    padding: 20px;
+    margin: 16px 0;
+    text-align: center;
+  }
+  .diagram-wrapper svg { max-width: 100%; height: auto; }
+
+  /* ===== Practice Cards ===== */
+  .practice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .practice-card {
+    background: #F8F9FE;
+    border: 1px solid #E0E7FF;
+    border-radius: 14px;
+    padding: 18px 20px;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .practice-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(133, 183, 235, 0.2);
+  }
+  .practice-card .difficulty {
+    position: absolute;
+    top: 12px; right: 14px;
+    font-size: 10px;
+    color: #FAC775;
+    letter-spacing: 1px;
+  }
+  .practice-card .q-num {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 13px;
+    color: #185FA5;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .practice-card .q-body {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a1a2e;
+  }
+  .practice-card .q-hint {
+    font-size: 12px;
+    color: #999;
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  .practice-card.full-width { grid-column: span 2; }
+
+  /* ===== Connection ===== */
+  .connection-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 14px 0;
+  }
+  .connection-card {
+    border-radius: 14px;
+    padding: 18px 20px;
+    font-size: 13px;
+  }
+  .connection-card .conn-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .conn-programming { background: #EEEDFE; }
+  .conn-programming .conn-title { color: #534AB7; }
+  .conn-go { background: #FAECE7; }
+  .conn-go .conn-title { color: #D85A30; }
+
+  /* ===== Summary Table ===== */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 13px;
+  }
+  .summary-table th {
+    background: linear-gradient(135deg, #FAEEDA, #FFF3D6);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: #854F0B;
+    border-radius: 8px 8px 0 0;
+  }
+  .summary-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #FAEEDA;
+  }
+  .summary-table tr:last-child td { border-bottom: none; }
+
+  /* ===== Next Preview ===== */
+  .next-preview {
+    background: linear-gradient(135deg, #1a1a2e, #2d2d5e);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 14px 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .next-preview .next-icon { font-size: 28px; }
+  .next-preview .next-text { font-size: 13px; }
+  .next-preview .next-text .day { color: #FAC775; font-weight: 600; }
+  .next-preview .next-text .topic { font-size: 15px; font-weight: 600; margin-top: 2px; }
+
+  /* ===== Submit Banner ===== */
+  .submit-banner {
+    background: linear-gradient(135deg, #E1F5EE, #E6F1FB);
+    border-radius: 14px;
+    padding: 18px 24px;
+    margin: 16px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #0F6E56;
+    border: 2px dashed #5DCAA5;
+  }
+  .submit-banner strong { color: #0F6E56; }
+
+  /* ===== Footer ===== */
+  .footer {
+    text-align: center;
+    padding: 28px 20px;
+    color: #888;
+    font-size: 12px;
+  }
+  .footer .footer-logo {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 16px;
+    color: #534AB7;
+    margin-bottom: 6px;
+  }
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .footer-nav a {
+    color: #534AB7;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 16px;
+    border: 1px solid #CECBF6;
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .footer-nav a:hover { background: #EEEDFE; }
+
+  /* ===== Answer Toggle (Show/Hide) ===== */
+  .answer-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    margin-top: 12px;
+    padding: 8px 14px;
+    background: linear-gradient(135deg, #E6F1FB, #EEEDFE);
+    border: 1.5px dashed #85B7EB;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #185FA5;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: 'Noto Sans SC', sans-serif;
+    user-select: none;
+  }
+  .answer-toggle:hover {
+    background: linear-gradient(135deg, #D6E7FB, #DEDDFE);
+    border-color: #378ADD;
+    transform: translateY(-1px);
+  }
+  .answer-toggle .toggle-icon {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+  .answer-toggle.open .toggle-icon {
+    transform: rotate(180deg);
+  }
+  .answer-toggle.open {
+    background: linear-gradient(135deg, #E1F5EE, #E6F1FB);
+    border-color: #5DCAA5;
+    color: #0F6E56;
+  }
+  .answer-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease, margin 0.3s ease;
+    padding: 0 16px;
+    margin-top: 0;
+  }
+  .answer-content.open {
+    max-height: 600px;
+    padding: 14px 16px;
+    margin-top: 10px;
+  }
+  .answer-inner {
+    background: linear-gradient(135deg, #F0FBF6, #F0F7FF);
+    border-radius: 10px;
+    padding: 14px 18px;
+    border-left: 4px solid #5DCAA5;
+  }
+  .answer-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #0F6E56;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .answer-value {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Baloo 2', sans-serif;
+    color: #0F6E56;
+    margin-bottom: 8px;
+  }
+  .answer-steps {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.8;
+  }
+  .answer-steps .step {
+    display: block;
+    margin-bottom: 4px;
+    padding-left: 18px;
+    position: relative;
+  }
+  .answer-steps .step::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #5DCAA5;
+    font-weight: 700;
+  }
+  .answer-fun {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #B8E6D0;
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 640px) {
+    .toc-grid { grid-template-columns: repeat(3, 1fr); }
+    .practice-grid { grid-template-columns: 1fr; }
+    .practice-card.full-width { grid-column: span 1; }
+    .connection-grid { grid-template-columns: 1fr; }
+    .masthead h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== Masthead ===== -->
+  <div class="masthead">
+    <div class="masthead-badge">STAR COMPANION DAILY</div>
+    <h1>星伴日报</h1>
+    <div class="subtitle">每一颗知识点，都是你星空中的一个星座</div>
+    <div class="masthead-meta">
+      <div class="meta-item"><span class="label">期号</span><span class="value">第 002 期</span></div>
+      <div class="meta-item"><span class="label">日期</span><span class="value">2026.09.23 周三</span></div>
+      <div class="meta-item"><span class="label">栏目</span><span class="value">计算思维</span></div>
+      <div class="meta-item"><span class="label">撰文</span><span class="value">星伴</span></div>
+      <div class="meta-item"><span class="label">读者</span><span class="value">沈思辰</span></div>
+    </div>
+  </div>
+
+  <!-- ===== Progress ===== -->
+  <div class="progress-bar">
+    <div class="progress-card">
+      <div class="progress-icon" style="background:#FAEEDA;">🔥</div>
+      <div class="progress-info"><div class="num">2</div><div class="lbl">连续学习（天）</div></div>
+    </div>
+    <div class="progress-card">
+      <div class="progress-icon" style="background:#E1F5EE;">📚</div>
+      <div class="progress-info"><div class="num">2</div><div class="lbl">已学知识点</div></div>
+    </div>
+    <div class="progress-card">
+      <div class="progress-icon" style="background:#FAECE7;">📝</div>
+      <div class="progress-info"><div class="num">5</div><div class="lbl">今日练习题</div></div>
+    </div>
+    <div class="progress-card">
+      <div class="progress-icon" style="background:#EEEDFE;">🔄</div>
+      <div class="progress-info"><div class="num">0</div><div class="lbl">待复习错题</div></div>
+    </div>
+  </div>
+
+  <!-- ===== TOC ===== -->
+  <div class="toc">
+    <div class="toc-title">本期目录 / CONTENTS</div>
+    <div class="toc-grid">
+      <a href="#warmup" class="toc-item toc-warmup"><div class="toc-icon">🔥</div><div class="toc-text">热身回顾</div></a>
+      <a href="#new" class="toc-item toc-new"><div class="toc-icon">📖</div><div class="toc-text">今日新知</div></a>
+      <a href="#practice" class="toc-item toc-practice"><div class="toc-icon">🎯</div><div class="toc-text">练习挑战</div></a>
+      <a href="#connect" class="toc-item toc-connect"><div class="toc-icon">🔗</div><div class="toc-text">思维连接</div></a>
+      <a href="#summary" class="toc-item toc-summary"><div class="toc-icon">📝</div><div class="toc-text">今日总结</div></a>
+    </div>
+  </div>
+
+  <!-- ===== Warm-up ===== -->
+  <div class="section sec-warmup" id="warmup">
+    <div class="section-header">
+      <span class="section-tag">WARM UP</span>
+      <h2>热身回顾</h2>
+    </div>
+    <p class="intro-text">先唤醒上期数学课的记忆，然后一起进入今天的计算思维世界！</p>
+    <div class="question-box">99 + 99 + 99 + 99 + 99 = ？</div>
+    <div class="question-box">198 + 199 + 203 + 202 = ？</div>
+    <p class="hint-text">提示：先凑整，再调整。想不起来的话可以点击答案看看，我们正好复习一遍～</p>
+  </div>
+
+  <!-- ===== New Knowledge ===== -->
+  <div class="section sec-new" id="new">
+    <div class="section-header">
+      <span class="section-tag">NEW KNOWLEDGE</span>
+      <h2>今日新知：流程图——算法的藏宝图</h2>
+    </div>
+    <p class="intro-text">传说在古代，英雄们出门冒险前都要先看一张<strong>藏宝图</strong>：先去哪儿、遇到岔路怎么选、最后抵达宝藏。算法就像藏宝图，而<strong>流程图</strong>就是把这张图画出来。</p>
+    <p class="intro-text"><strong>算法</strong>就是解决一件事的分步骤方法。做一道菜、整理书包、上学路线……都是算法。流程图用约定好的图形把这些步骤画出来，让人一眼看懂。</p>
+
+    <div class="diagram-wrapper">
+      <svg viewBox="0 0 680 540" width="100%" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>流程图符号示例：判断要不要带外套</title>
+        <desc>展示流程图中的开始结束、输入输出、判断、处理和流向箭头</desc>
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <text x="340" y="28" text-anchor="middle" font-size="14" font-weight="500" fill="#3C3489" font-family="sans-serif">流程图：出门要不要带外套？</text>
+        <!-- start -->
+        <rect x="280" y="50" width="120" height="44" rx="22" fill="#E1F5EE" stroke="#5DCAA5" stroke-width="1.5"/>
+        <text x="340" y="75" text-anchor="middle" font-size="13" font-weight="500" fill="#04342C" font-family="sans-serif">开始</text>
+        <line x1="340" y1="94" x2="340" y2="118" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- input -->
+        <polygon points="300,118 380,118 400,140 380,162 300,162 280,140" fill="#E6F1FB" stroke="#85B7EB" stroke-width="1.5"/>
+        <text x="340" y="143" text-anchor="middle" font-size="12" font-weight="500" fill="#042C53" font-family="sans-serif">输入：今天温度</text>
+        <line x1="340" y1="162" x2="340" y2="186" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- decision -->
+        <polygon points="340,186 410,230 340,274 270,230" fill="#FAEEDA" stroke="#EF9F27" stroke-width="1.5"/>
+        <text x="340" y="225" text-anchor="middle" font-size="12" font-weight="500" fill="#854F0B" font-family="sans-serif">温度</text>
+        <text x="340" y="242" text-anchor="middle" font-size="12" font-weight="500" fill="#854F0B" font-family="sans-serif">&lt; 15℃？</text>
+
+        <!-- yes branch -->
+        <text x="300" y="215" text-anchor="middle" font-size="11" fill="#0F6E56" font-family="sans-serif">是</text>
+        <line x1="270" y1="230" x2="190" y2="230" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="190" y1="230" x2="190" y2="300" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <rect x="130" y="300" width="120" height="44" rx="8" fill="#EEEDFE" stroke="#CECBF6" stroke-width="1.5"/>
+        <text x="190" y="325" text-anchor="middle" font-size="12" font-weight="500" fill="#3C3489" font-family="sans-serif">带上外套</text>
+        <line x1="190" y1="344" x2="190" y2="380" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- no branch -->
+        <text x="385" y="215" text-anchor="middle" font-size="11" fill="#185FA5" font-family="sans-serif">否</text>
+        <line x1="410" y1="230" x2="490" y2="230" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="490" y1="230" x2="490" y2="300" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <rect x="430" y="300" width="120" height="44" rx="8" fill="#EEEDFE" stroke="#CECBF6" stroke-width="1.5"/>
+        <text x="490" y="325" text-anchor="middle" font-size="12" font-weight="500" fill="#3C3489" font-family="sans-serif">不用带外套</text>
+        <line x1="490" y1="344" x2="490" y2="380" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- merge -->
+        <line x1="190" y1="380" x2="340" y2="380" stroke="#534AB7" stroke-width="1.5"/>
+        <line x1="490" y1="380" x2="340" y2="380" stroke="#534AB7" stroke-width="1.5"/>
+        <line x1="340" y1="380" x2="340" y2="404" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- output -->
+        <polygon points="290,404 390,404 410,426 390,448 290,448 270,426" fill="#FAECE7" stroke="#F0997B" stroke-width="1.5"/>
+        <text x="340" y="429" text-anchor="middle" font-size="12" font-weight="500" fill="#633006" font-family="sans-serif">输出：决定</text>
+        <line x1="340" y1="448" x2="340" y2="472" stroke="#534AB7" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <!-- end -->
+        <rect x="280" y="472" width="120" height="44" rx="22" fill="#E1F5EE" stroke="#5DCAA5" stroke-width="1.5"/>
+        <text x="340" y="497" text-anchor="middle" font-size="13" font-weight="500" fill="#04342C" font-family="sans-serif">结束</text>
+
+        <!-- legend -->
+        <rect x="40" y="360" width="220" height="156" rx="12" fill="#fff" stroke="#E0E7FF" stroke-width="0.5"/>
+        <text x="150" y="384" text-anchor="middle" font-size="12" font-weight="700" fill="#534AB7" font-family="sans-serif">符号图例</text>
+        <rect x="55" y="398" width="36" height="18" rx="9" fill="#E1F5EE" stroke="#5DCAA5" stroke-width="1"/>
+        <text x="100" y="410" text-anchor="start" font-size="11" fill="#444" font-family="sans-serif">开始 / 结束</text>
+        <polygon points="55,432 91,432 101,443 91,454 55,454 45,443" fill="#E6F1FB" stroke="#85B7EB" stroke-width="1"/>
+        <text x="110" y="444" text-anchor="start" font-size="11" fill="#444" font-family="sans-serif">输入 / 输出</text>
+        <polygon points="73,470 98,492 73,514 48,492" fill="#FAEEDA" stroke="#EF9F27" stroke-width="1"/>
+        <text x="110" y="495" text-anchor="start" font-size="11" fill="#444" font-family="sans-serif">判断（分叉）</text>
+      </svg>
+    </div>
+
+    <div class="highlight-box">
+      <strong>流程图四大常见符号：</strong>
+      <br>🔵 <strong>圆角矩形</strong> = 开始 / 结束
+      <br>🔷 <strong>平行四边形</strong> = 输入 / 输出
+      <br>💠 <strong>菱形</strong> = 判断（会分出「是 / 否」两条路）
+      <br>⬜ <strong>矩形</strong> = 处理 / 做一件事
+      <br>➡️ 箭头 = 流程方向
+    </div>
+    <p class="intro-text">思辰，流程图的魅力就是：<strong>把想不清楚的事情画清楚</strong>。等以后学 Scratch 或 Python，你写的程序也是这样一条一条执行的。</p>
+  </div>
+
+  <!-- ===== Practice ===== -->
+  <div class="section sec-practice" id="practice">
+    <div class="section-header">
+      <span class="section-tag">CHALLENGE</span>
+      <h2>练习挑战</h2>
+    </div>
+    <p class="intro-text">先自己走一遍流程，再对照答案。错了也没关系，告诉我就行～</p>
+    <div class="practice-grid">
+      <div class="practice-card">
+        <div class="difficulty">⭐</div>
+        <div class="q-num">第 1 题 · 入门</div>
+        <div class="q-body">流程图中，表示「判断 / 分支」的符号是什么形状？</div>
+        <div class="answer-toggle"><span class="toggle-icon">▾</span><span class="toggle-text">查看答案与解析</span></div>
+        <div class="answer-content">
+          <div class="answer-inner">
+            <div class="answer-label">✅ 答案</div>
+            <div class="answer-value">菱形 ◇</div>
+            <div class="answer-label">💡 解题思路</div>
+            <div class="answer-steps">
+              <span class="step">圆角矩形表示开始 / 结束</span>
+              <span class="step">平行四边形表示输入 / 输出</span>
+              <span class="step">矩形表示处理步骤</span>
+              <span class="step">菱形专门用来表示「判断」，答案通常是「是 / 否」或「对 / 错」</span>
+            </div>
+            <div class="answer-fun">记住它：菱形的四个角像十字路口，正好要我们选择走哪条路！</div>
+          </div>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="difficulty">⭐</div>
+        <div class="q-num">第 2 题 · 入门</div>
+        <div class="q-body">看上面的「带外套」流程图，如果今天温度是 18℃，流程会输出什么决定？</div>
+        <div class="answer-toggle"><span class="toggle-icon">▾</span><span class="toggle-text">查看答案与解析</span></div>
+        <div class="answer-content">
+          <div class="answer-inner">
+            <div class="answer-label">✅ 答案</div>
+            <div class="answer-value">不用带外套</div>
+            <div class="answer-label">💡 解题思路</div>
+            <div class="answer-steps">
+              <span class="step">判断条件是：温度 &lt; 15℃？</span>
+              <span class="step">18℃ 不小于 15℃，所以走「否」那条路</span>
+              <span class="step">「否」对应的结果是：不用带外套</span>
+            </div>
+            <div class="answer-fun">18℃ 其实体感可能还凉，但在这个流程图里它按规则走～算法就是严格按规则执行的小助手。</div>
+          </div>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="difficulty">⭐⭐</div>
+        <div class="q-num">第 3 题 · 进阶</div>
+        <div class="q-body">把下面「早上起床」的步骤按合理顺序编号：
+          <br>A. 起床穿衣
+          <br>B. 刷牙洗脸
+          <br>C. 吃早饭
+          <br>D. 背书包出门
+        </div>
+        <div class="answer-toggle"><span class="toggle-icon">▾</span><span class="toggle-text">查看答案与解析</span></div>
+        <div class="answer-content">
+          <div class="answer-inner">
+            <div class="answer-label">✅ 答案</div>
+            <div class="answer-value">A → B → C → D</div>
+            <div class="answer-label">💡 解题思路</div>
+            <div class="answer-steps">
+              <span class="step">流程图要按时间顺序执行</span>
+              <span class="step">先起床，才能洗漱</span>
+              <span class="step">洗漱完再吃早饭</span>
+              <span class="step">吃完早饭才出门上学</span>
+            </div>
+            <div class="answer-fun">如果顺序错了，比如先出门再起床……就会变成《西游记》里的妖怪了吧？🐒</div>
+          </div>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="difficulty">⭐⭐⭐</div>
+        <div class="q-num">第 4 题 · 挑战</div>
+        <div class="q-body">一个流程图判断一个数是否为偶数：输入 ÷ 2，如果余数为 0 就输出「偶数」，否则输出「奇数」。输入 17，会输出什么？</div>
+        <div class="answer-toggle"><span class="toggle-icon">▾</span><span class="toggle-text">查看答案与解析</span></div>
+        <div class="answer-content">
+          <div class="answer-inner">
+            <div class="answer-label">✅ 答案</div>
+            <div class="answer-value">奇数</div>
+            <div class="answer-label">💡 解题思路</div>
+            <div class="answer-steps">
+              <span class="step">17 ÷ 2 = 8 余 1</span>
+              <span class="step">判断条件：余数是否为 0？</span>
+              <span class="step">1 ≠ 0，所以走「否」分支</span>
+              <span class="step">输出「奇数」</span>
+            </div>
+            <div class="answer-fun">这个判断是编程里超级常用的「if...else」！以后会写成：如果余数==0，就是偶数，否则就是奇数。</div>
+          </div>
+        </div>
+      </div>
+      <div class="practice-card full-width">
+        <div class="difficulty">⭐⭐⭐⭐</div>
+        <div class="q-num">第 5 题 · 大挑战</div>
+        <div class="q-body">试着用文字描述一个判断「考试成绩是否及格」的流程图。及格线是 60 分，输入一个分数 75，它会输出什么？如果输入 55 呢？</div>
+        <div class="answer-toggle"><span class="toggle-icon">▾</span><span class="toggle-text">查看答案与解析</span></div>
+        <div class="answer-content">
+          <div class="answer-inner">
+            <div class="answer-label">✅ 答案</div>
+            <div class="answer-value">75 分 → 及格；55 分 → 不及格</div>
+            <div class="answer-label">💡 解题思路</div>
+            <div class="answer-steps">
+              <span class="step">开始 → 输入分数</span>
+              <span class="step">判断：分数 ≥ 60？</span>
+              <span class="step">如果是，输出「及格」</span>
+              <span class="step">如果否，输出「不及格」</span>
+              <span class="step">结束</span>
+            </div>
+            <div class="answer-fun">下次考试，你可以给自己画一个「奖励流程图」：及格 → 奖励一颗星；全对 → 奖励三颗星！⭐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Connections ===== -->
+  <div class="section sec-connect" id="connect">
+    <div class="section-header">
+      <span class="section-tag">CONNECTION</span>
+      <h2>思维连接</h2>
+    </div>
+    <p class="intro-text">流程图不只是编程的工具，它是一种「把步骤想清楚」的能力：</p>
+    <div class="connection-grid">
+      <div class="connection-card conn-programming">
+        <div class="conn-title">📐 数学连接</div>
+        解应用题时，我们也在按步骤走：<strong>读题 → 找条件 → 列算式 → 检查</strong>。流程图让这四步清晰可见，不容易跳步漏条件。
+      </div>
+      <div class="connection-card conn-go">
+        <div class="conn-title">♟ 围棋连接</div>
+        围棋里也有一串「如果……就……」的决策：如果对手断我，我就连接；如果我被包围，我就做活。高手脑子里就像装着很多张流程图！
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Summary ===== -->
+  <div class="section sec-summary" id="summary">
+    <div class="section-header">
+      <span class="section-tag">SUMMARY</span>
+      <h2>今日总结</h2>
+    </div>
+    <table class="summary-table">
+      <tr><th>要点</th><th>内容</th></tr>
+      <tr><td>什么是算法</td><td>解决问题的一步步方法</td></tr>
+      <tr><td>什么是流程图</td><td>把算法画出来的图形语言</td></tr>
+      <tr><td>判断符号</td><td>菱形，用来分出「是 / 否」两条路</td></tr>
+      <tr><td>思维迁移</td><td>数学题分步解、围棋决策树、生活安排</td></tr>
+    </table>
+
+    <div class="next-preview">
+      <div class="next-icon">🧩</div>
+      <div class="next-text">
+        <div class="day">明日预告 · 9月24日 周四</div>
+        <div class="topic">奥数专题 — 数论或逻辑推理小专题</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Submit Banner ===== -->
+  <div class="submit-banner">
+    <strong>💡 自学模式：</strong> 先自己做题，做完后点击每题的「查看答案与解析」对照检查<br>
+    <strong>有做错的题？</strong> 把题号发给我，我会详细讲解并加入错题复习循环（1天 → 3天 → 7天 → 14天）<br>
+    <strong>全部做对了？</strong> 也告诉我一声，我会给你加深难度！
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <div class="footer">
+    <div class="footer-logo">星伴日报 ✨</div>
+    <div>撰文：星伴 | 读者：沈思辰 | 第 002 期</div>
+    <div class="footer-nav">
+      <a href="index.html">📚 往期目录</a>
+      <a href="#warmup">回到顶部</a>
+    </div>
+  </div>
+
+</div>
+<script>
+document.querySelectorAll('.answer-toggle').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var content = this.nextElementSibling;
+    var isOpen = content.classList.contains('open');
+    if (isOpen) {
+      content.classList.remove('open');
+      this.classList.remove('open');
+      this.querySelector('.toggle-text').textContent = '查看答案与解析';
+    } else {
+      content.classList.add('open');
+      this.classList.add('open');
+      this.querySelector('.toggle-text').textContent = '收起答案与解析';
+    }
+  });
+});
+</script>
+</body>
+</html>
